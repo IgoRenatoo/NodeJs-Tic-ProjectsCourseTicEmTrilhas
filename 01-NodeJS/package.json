@@ -1,0 +1,8 @@
+{
+  "name": "01-nodejs",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "scripts": {
+    "dev": "node ./"
+  }
+}

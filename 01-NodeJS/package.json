@@ -1,8 +1,18 @@
 {
   "name": "01-nodejs",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "dev": "node ./"
+    "dev": "tsx --watch ./"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "helmet": "^8.0.0",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7",
+    "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.28.20"
   }
 }

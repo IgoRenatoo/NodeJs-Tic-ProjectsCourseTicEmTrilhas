@@ -1,0 +1,18 @@
+import { Router, Request, Response, NextFunction } from 'express'
+import { newUser } from '../controllers/app-controller'
+
+// Função para gerenciar as rotas da aplicação.
+export const routes = Router()
+
+routes.post('/user', async (req: Request, res: Response) => {
+  try {
+    const body = req.body
+    const response = await newUser(body)
+    res.status(response.code).json(response.message)
+  } catch (error) {
+    res.status(500).json({ error: 'Erro interno do servidor' })
+  }
+})
+routes.get('/user/:id', (req: Request, res: Response) => {})
+routes.patch('/user/:id', (req: Request, res: Response) => {})
+routes.delete('/user/:id', (req: Request, res: Response) => {})

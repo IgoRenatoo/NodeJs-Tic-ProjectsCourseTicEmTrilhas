@@ -1,17 +1,4 @@
-type SwaggerType = {
-  definition: {
-    openapi: string;
-    info: {
-        title: string;
-        version: string;
-        description: string;
-    };
-    servers: {
-        url: string;
-    }[];
-};
-apis: string[];
-}
+import { SwaggerType } from './models/type-models'
 
 export const swaggerOptions: SwaggerType = {
   definition: {
@@ -27,5 +14,5 @@ export const swaggerOptions: SwaggerType = {
       }
     ]
   },
-  apis: ['./src/routes/*.ts']
+  apis: ['./src/swagger.ts','./src/routes/*.ts']
 }

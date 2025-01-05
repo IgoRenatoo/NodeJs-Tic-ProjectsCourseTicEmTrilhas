@@ -1,40 +1,22 @@
-import http from 'http'
-import fs from 'fs'
-import { sequelize } from './models/app-models'
-import { rotas } from './routers/app-router'
+import express from 'express'
+import cors from 'cors'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import { swaggerOptions } from './swagger'
+import { sequelize } from './models/db-models'
+import { routes } from './routes/app-route'
 
-// Função para criar o arquivo
-fs.writeFile('./mensagem.txt', 'Olá, TIC em Trilhas do arquivo!', 'utf8', (erro) => {
-  if (erro) {
-    console.error('Falha ao escrever no arquivo:', erro)
-  } else {
-    console.log('Arquivo criado com sucesso!')
-  }
+import 'dotenv/config'
+sequelize.sync()
+
+const app = express()
+const swaggerDocs = swaggerJsdoc(swaggerOptions)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use(cors({ origin: 'http://localhost:3000/' }))
+app.use(express.json())
+app.use(routes)
+
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor executando em http://localhost:${process.env.PORT}/`)
 })
-
-// Ler o arquivo após criá-lo
-fs.readFile('./mensagem.txt', 'utf8', (erro, conteudo) => {
-  if (erro) {
-    console.error('Falha na leitura do arquivo:', erro)
-  } else {
-    console.log('Conteúdo do arquivo:', conteudo)
-  }
-
-  // Iniciar o servidor HTTP usando o conteúdo lido
-  iniciaServidorHttp(conteudo)
-})
-
-function iniciaServidorHttp (conteudo) {
-  const porta = 3000
-  const host = 'localhost'
-
-  sequelize.sync()
-
-  const servidor = http.createServer((req, res) => {
-    rotas(req, res, conteudo)
-  })
-
-  servidor.listen(porta, host, () => {
-    console.log(`Servidor executando em http://${host}:${porta}/`)
-  })
-}

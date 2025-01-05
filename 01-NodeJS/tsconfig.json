@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2023", // Define a versão do JavaScript que será gerada.
+    "module": "CommonJS", // Configura o sistema de módulos usado no Node.js.
+    "outDir": "./dist", // Diretório onde os arquivos compilados serão salvos.
+    "rootDir": "./src", // Diretório base para os arquivos TypeScript.
+    "forceConsistentCasingInFileNames": true, // Garante consistência de maiúsculas/minúsculas nos nomes de arquivos.
+    "strict": true, // Ativa o modo estrito, que inclui várias verificações rigorosas.
+    "esModuleInterop": true, // Habilita a interoperabilidade com módulos do ECMAScript.
+    "skipLibCheck": true, // Ignora verificações de tipos em arquivos de declaração (d.ts).
+  },
+  "include": ["src/**/*"], // Inclui todos os arquivos na pasta src.
+  "exclude": ["node_modules"] // Evita que a pasta node_modules seja incluída no processo de compilação.
+}

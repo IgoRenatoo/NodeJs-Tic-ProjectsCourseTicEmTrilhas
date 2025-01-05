@@ -3,6 +3,11 @@ export type UserData = {
   password: string
 }
 
+export type ProductData = {
+  name: string
+  price: number
+}
+
 export type SwaggerType = {
   definition: {
     openapi: string;

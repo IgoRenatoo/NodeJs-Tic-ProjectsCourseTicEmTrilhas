@@ -26,3 +26,20 @@ export const User = sequelize.define('user', {
     allowNull: false
   }
 })
+
+// Criação da tabela Produto definindo os parâmetros  e suas respectivas colunas.
+export const Product = sequelize.define('product', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  price: {
+    type: DataTypes.DOUBLE,
+    allowNull: false
+  }
+})

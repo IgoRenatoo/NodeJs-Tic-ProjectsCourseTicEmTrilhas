@@ -21,7 +21,7 @@ export default [
       'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1 }], // Máximo de 2 linhas vazias consecutivas
 
       // Espaçamento
-      'space-before-function-paren': ['error', 'always'], // Espaço antes de parênteses nas funções
+      /* 'space-before-function-paren': ['error', 'always'], // Espaço antes de parênteses nas funções */
       'space-infix-ops': ['error'], // Garante espaço ao redor de operadores (como =)
       'space-before-blocks': ['error', 'always'], // Espaço antes de blocos ({)
       'keyword-spacing': ['error', { before: true }],

@@ -10,15 +10,15 @@ export type ProductData = {
 
 export type SwaggerType = {
   definition: {
-    openapi: string;
+    openapi: string
     info: {
-        title: string;
-        version: string;
-        description: string;
-    };
+      title: string
+      version: string
+      description: string
+    }
     servers: {
-        url: string;
-    }[];
-};
-apis: string[];
+      url: string
+    }[]
+  }
+  apis: string[]
 }

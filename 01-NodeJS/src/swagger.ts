@@ -52,6 +52,49 @@ Usuários
  *         description: Erro ~> Interno do servidor.
  */
 
+// endpoint Buscar todos usuários
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     summary: Buscar todos usuários.
+ *     tags:
+ *      - Usuário
+ *     responses:
+ *       200:
+ *         description: Objeto com msg de sucesso e array com usuários cadastrados.
+ *       400:
+ *         description: Erro ~> Ao buscar lista de usuários no bando de dados!
+ *       500:
+ *         description: Erro ~> Interno servidor.
+ */
+
+// endpoint Buscar usuário pelo ID
+/**
+ * @swagger
+ * /user/:{id}:
+ *   get:
+ *     summary: Busca usuário por ID.
+ *     tags:
+ *      - Usuário
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID do usuário a ser localizado.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuários de ID:xxx está cadastrado!.
+ *       400:
+ *         description: Erro ~> O ID fornecido não é do número ( n or 'n')!
+ *       409:
+ *         description: Erro ~> Usuário com ID:xxx não é cadastrado!.
+ *       500:
+ *         description: Erro ~> Interno servidor.
+ */
+
 
 /*
 Produtos

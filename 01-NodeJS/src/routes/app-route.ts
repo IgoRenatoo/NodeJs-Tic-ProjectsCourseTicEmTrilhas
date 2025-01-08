@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express'
-import { newUser, newProduct } from '../controllers/app-controller'
+import { newUser, newProduct, getUsers, getUser } from '../controllers/app-controller'
 import { UserData } from '../models/type-models'
 
 const middleValidation = (req: Request, res: Response, next: NextFunction) => {
@@ -15,6 +15,7 @@ const middleValidation = (req: Request, res: Response, next: NextFunction) => {
 
 // Função para gerenciar as rotas da aplicação.
 export const routes = Router()
+
 // Criar novo usuário
 routes.post('/user', async (req: Request, res: Response) => {
   try {
@@ -26,6 +27,26 @@ routes.post('/user', async (req: Request, res: Response) => {
   }
 })
 
+// Buscar todos usuários
+routes.get('/user/', async (req: Request, res: Response) => {
+  try {
+    const response = await getUsers()
+    res.status(response.code).json({ message: response.message, content: response.content })
+  } catch (error) {
+    res.status(500).json({ error: 'Erro interno do servidor' })
+  }
+})
+
+// Buscar usuário por ID
+routes.get('/user/:id', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const response = await getUser(id)
+    res.status(response.code).json(response)
+  } catch (error) {
+    res.status(500).json({ error: 'Erro interno do servidor' })
+  }
+})
 routes.patch('/user/:id', (req: Request, res: Response) => {})
 routes.delete('/user/:id', (req: Request, res: Response) => {})
 

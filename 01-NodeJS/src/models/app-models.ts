@@ -17,6 +17,35 @@ export async function createUser(userData: UserData) {
   }
 }
 
+// Buscar todos usuários
+export async function getAllUsers() {
+  try {
+    const users = await User.findAll()
+    const result: Result = { code: 200, message: 'Lista de usuários obtida com sucesso!', content: users }
+    return result
+  } catch (error) {
+    console.error('Erro ao criar produto:', error)
+    const result: Result = { code: 400, message: 'Error ao buscas lista de usuários!' }
+    return result
+  }
+}
+
+// Buscar usuário por ID
+export async function getUserById(userId: number) {
+  try {
+    if (!await User.findOne({ where: { id: userId } })) {
+      return { code: 409, message: `Erro: Usuário com ID: ${userId} não é cadastrado!` }
+    }
+    const user = await User.findOne({ where: { id: userId } })
+    const result: Result = { code: 200, message: `Usuários de ID:${userId} está cadastrado!`, content: user }
+    return result
+  } catch (error) {
+    console.error('Erro ao criar produto:', error)
+    const result: Result = { code: 400, message: 'Error ao buscas lista de usuários!' }
+    return result
+  }
+}
+
 // Criar novo produto
 export async function createProduct(productData: ProductData) {
   try {

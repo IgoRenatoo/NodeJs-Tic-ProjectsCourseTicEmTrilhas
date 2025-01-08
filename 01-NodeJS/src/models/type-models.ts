@@ -8,6 +8,12 @@ export type ProductData = {
   price: number
 }
 
+export type Result = {
+  code: number
+  message: string
+  content?: any
+}
+
 export type SwaggerType = {
   definition: {
     openapi: string

@@ -1,9 +1,8 @@
-import { createUser, createProduct, getAllUsers, getUserById } from '../models/app-models'
+import { createUser, createProduct, getUser, getUsers } from '../models/app-models'
 import { UserData, ProductData } from '../models/type-models'
 
-export const newUser = (userData: UserData) => createUser(userData)
-export const getUsers = () => getAllUsers()
-export const getUser = (userId: string) => (Number(userId)) ? getUserById(Number(userId)) : { code: 400, message: 'O ID fornecido não é um número!' }
+export const createUserController = (userData: UserData) => createUser(userData)
+export const getUserController = (userId: number) => getUser(userId)
+export const getUsersController = () => getUsers()
 
-
-export const newProduct = (productData: ProductData) => createProduct(productData)
+export const createProductController = (productData: ProductData) => createProduct(productData)

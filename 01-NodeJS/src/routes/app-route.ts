@@ -1,33 +1,33 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router, Request, Response } from 'express'
 import { UserData } from '../models/type-models'
-import { createProductController, createUserController, getUserController, getUsersController } from '../controllers/app-controller'
-
-const middleValidation = (req: Request, res: Response, next: NextFunction) => {
-  const validation = true
-  if (validation) {
-    console.log('Validação realizada!')
-    next()
-  } else {
-    console.log('Validação negada!')
-    res.status(403).json({ messagge: 'Acesso negado!' })
-  }
-}
+import { loginUserController, createUserController, getUserController, getUsersController, createProductController } from '../controllers/app-controller'
 
 // Função para gerenciar as rotas da aplicação.
 export const routes = Router()
 
-// Criar novo usuário
+// Realiza login
+routes.post('/login', async (req: Request, res: Response) => {
+  try {
+    const userData: UserData = req.body
+    const response = await loginUserController(userData)
+    res.status(response.code).json({ message: response.message, user: response.content })
+  } catch (error) {
+    res.status(500).json({ error: 'Erro interno do servidor' })
+  }
+})
+
+// Cria novo usuário
 routes.post('/user', async (req: Request, res: Response) => {
   try {
-    const body: UserData = req.body
-    const response = await createUserController(body)
+    const userData: UserData = req.body
+    const response = await createUserController(userData)
     res.status(response.code).json(response.message)
   } catch (error) {
     res.status(500).json({ error: 'Erro interno do servidor' })
   }
 })
 
-// Buscar usuário por ID
+// Busca usuário por ID
 routes.get('/user/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params
@@ -42,7 +42,7 @@ routes.get('/user/:id', async (req: Request, res: Response) => {
   }
 })
 
-// Buscar todos usuários
+// Busca todos usuários
 routes.get('/user/', async (req: Request, res: Response) => {
   try {
     const response = await getUsersController()
@@ -54,8 +54,8 @@ routes.get('/user/', async (req: Request, res: Response) => {
 routes.patch('/user/:id', (req: Request, res: Response) => {})
 routes.delete('/user/:id', (req: Request, res: Response) => {})
 
-// Criar novo produto
-routes.post('/produto', middleValidation, async (req: Request, res: Response) => {
+// Cria novo produto
+routes.post('/produto', async (req: Request, res: Response) => {
   try {
     const productData = req.body
     const response = await createProductController(productData)

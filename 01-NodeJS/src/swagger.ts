@@ -20,7 +20,39 @@ export const swaggerOptions: SwaggerType = {
 Usuários
 */
 
-// endpoint Criar usuário
+// endpoint Login
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Realiza login.
+ *     tags:
+ *      - Usuário
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nome do usuário.
+ *               password:
+ *                 type: string
+ *                 description: Senha do usuário.
+ *     responses:
+ *       200:
+ *         description: Usuário logado com sucesso!
+ *       403:
+ *         description: Erro ~> Usuário ou senha inválidos!
+ *       400:
+ *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
+ *       500:
+ *         description: Erro ~> Interno do servidor.
+ */
+
+// endpoint Cria usuário
 /**
  * @swagger
  * /user:
@@ -44,32 +76,15 @@ Usuários
  *     responses:
  *       201:
  *         description: Usuário criado com sucesso.
- *       400:
- *         description: Erro ~> Ao cadastrar novo usuários ao banco de dados!
  *       409:
  *         description: Erro ~> Usuário com nome já cadastrado!.
+ *       400:
+ *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
  *       500:
  *         description: Erro ~> Interno do servidor.
  */
 
-// endpoint Buscar todos usuários
-/**
- * @swagger
- * /user:
- *   get:
- *     summary: Buscar todos usuários.
- *     tags:
- *      - Usuário
- *     responses:
- *       200:
- *         description: Objeto com msg de sucesso e array com usuários cadastrados.
- *       400:
- *         description: Erro ~> Ao buscar lista de usuários no bando de dados!
- *       500:
- *         description: Erro ~> Interno servidor.
- */
-
-// endpoint Buscar usuário pelo ID
+// endpoint Busca usuário pelo ID
 /**
  * @swagger
  * /user/:{id}:
@@ -87,10 +102,27 @@ Usuários
  *     responses:
  *       200:
  *         description: Usuários de ID:xxx está cadastrado!.
- *       400:
- *         description: Erro ~> O ID fornecido não é do número ( n or 'n')!
  *       409:
  *         description: Erro ~> Usuário com ID:xxx não é cadastrado!.
+ *       400:
+ *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
+ *       500:
+ *         description: Erro ~> Interno servidor.
+ */
+
+// endpoint Busca todos usuários
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     summary: Busca todos usuários.
+ *     tags:
+ *      - Usuário
+ *     responses:
+ *       200:
+ *         description: Objeto com msg de sucesso e array com usuários cadastrados.
+ *       400:
+ *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
  *       500:
  *         description: Erro ~> Interno servidor.
  */
@@ -100,7 +132,7 @@ Usuários
 Produtos
 */
 
-// endpoint Criar produto
+// endpoint Cria produto
 /**
  * @swagger
  * /produto:
@@ -124,10 +156,10 @@ Produtos
  *     responses:
  *       201:
  *         description: Produto criado com sucesso.
- *       400:
- *         description: Erro ~> Ao cadastrar novo produto no banco de dados!
  *       409:
  *         description: Erro ~> Produto com nome já cadastrado!.
+ *       400:
+ *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
  *       500:
  *         description: Erro ~> Interno servidor.
  */

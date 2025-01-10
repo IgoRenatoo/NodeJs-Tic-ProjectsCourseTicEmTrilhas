@@ -1,6 +1,8 @@
 export type UserData = {
+  id?: number
   name: string
   password: string
+  token?: string
 }
 
 export type ProductData = {

@@ -1,6 +1,7 @@
 export type UserData = {
   id?: number
-  name: string
+  name?: string
+  nickname: string
   password: string
   token?: string
 }

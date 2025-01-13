@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express'
-import JWT from 'jsonwebtoken'
+import { passport } from '../config/passport-config'
 import { UserData } from '../models/type-models'
 import { loginUserController, createUserController, getUserController, getUsersController, createProductController } from '../controllers/app-controller'
 
@@ -7,16 +7,17 @@ import { loginUserController, createUserController, getUserController, getUsersC
 export const routes = Router()
 
 // Middleware de autenticação
-export const middlewareAuth = (req: Request, res: Response, next: NextFunction): void => {
-  try {
-    const token = req.headers['authorization']?.split(' ')[1] as string
-    // Decodificando o token usando a chave secreta
-    const decoded = JWT.verify(token, process.env.SECRET_KEY as string)
-
-    next() // Prossegue para o próximo middleware ou a rota
-  } catch (error) {
-    res.status(401).json({ message: 'Token inválido ou expirado' })
-  }
+export const middlewareAuth = (req: Request, res: Response, next: NextFunction) => {
+  passport.authenticate('jwt', (err: any, user: UserData) => {
+    if (err) {
+      return res.status(401).json({ error: 'Erro ao autenticar', details: err })
+    }
+    if (!user) {
+      return res.status(401).json({ error: 'Acesso não autorizado!' })
+    }
+    req.user = user
+    next()
+  })(req, res, next)
 }
 
 // Realiza login

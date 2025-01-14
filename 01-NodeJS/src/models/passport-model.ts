@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { Strategy, ExtractJwt } from 'passport-jwt'
-import { getUserController } from '../controllers/app-controller'
+import { getUser } from '../services/user-service'
 import 'dotenv/config'
 
 // Configurando a estratégia JWT
@@ -12,7 +12,7 @@ passport.use(
     },
     async (JWTPayload: any, done: any) => {
       try {
-        const user = await getUserController(JWTPayload.id) // Buscar usuário no banco pelo ID presente no payload
+        const user = await getUser(JWTPayload.id) // Buscar usuário no banco pelo ID presente no payload
 
         if (user) { // Se o usuário for encontrado, retorna o usuário através do callback `done` para o Passport
           return done(null, user.content)

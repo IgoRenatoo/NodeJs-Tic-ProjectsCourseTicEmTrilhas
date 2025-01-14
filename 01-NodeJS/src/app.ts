@@ -2,14 +2,13 @@ import express from 'express'
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
-import { passport } from './config/passport-config'
-import { swaggerOptions } from './swagger'
-import { sequelize } from './models/db-models'
+import { passport } from './models/passport-model'
+import { swaggerOptions } from './swagger/config-swagger'
+import { sequelize } from './models/database-model'
 import { routes } from './routes/app-route'
-
 import 'dotenv/config'
-sequelize.sync()
 
+sequelize.sync()
 const app = express()
 const swaggerDocs = swaggerJsdoc(swaggerOptions)
 

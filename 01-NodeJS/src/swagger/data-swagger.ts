@@ -1,26 +1,8 @@
-import { SwaggerType } from './models/type-models'
-
-export const swaggerOptions: SwaggerType = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API Documentation Tic em Trilha',
-      version: '1.0.0',
-      description: 'API documentation using Swagger UI'
-    },
-    servers: [
-      {
-        url: 'http://localhost:3000'
-      }
-    ]
-  },
-  apis: ['./src/swagger.ts','./src/routes/*.ts']
-}
 /*
 Usuários
 */
 
-// endpoint Login
+// endpoint Realiza Login
 /**
  * @swagger
  * /login:
@@ -121,43 +103,6 @@ Usuários
  *     responses:
  *       200:
  *         description: Objeto com msg de sucesso e array com usuários cadastrados.
- *       400:
- *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
- *       500:
- *         description: Erro ~> Interno servidor.
- */
-
-
-/*
-Produtos
-*/
-
-// endpoint Cria produto
-/**
- * @swagger
- * /produto:
- *   post:
- *     summary: Cria um novo produto.
- *     tags:
- *      - Produto
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: Nome do produto.
- *               price:
- *                 type: number
- *                 description: Preço do produto.
- *     responses:
- *       201:
- *         description: Produto criado com sucesso.
- *       409:
- *         description: Erro ~> Produto com nome já cadastrado!.
  *       400:
  *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
  *       500:

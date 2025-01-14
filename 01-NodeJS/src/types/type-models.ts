@@ -1,14 +1,9 @@
 export type UserData = {
   id?: number
   name?: string
-  nickname: string
-  password: string
+  nickname?: string
+  password?: string
   token?: string
-}
-
-export type ProductData = {
-  name: string
-  price: number
 }
 
 export type Result = {

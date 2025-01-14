@@ -8,7 +8,7 @@ export const sequelize = new Sequelize({
 // Verifica a conexão do sequelize com o banco de dados.
 sequelize.authenticate()
   .then(() => { console.log('Conexão com database estabelecida com sucesso!') })
-  .catch((erro) => { console.error('Erro ao conectar ao banco de dados:', erro) })
+  .catch((erro) => { console.error('Erro ao conectar ao banco de dados: ', erro) })
 
 // Criação da tabela User definindo os parâmetros e suas respectivas colunas.
 export const User = sequelize.define('user', {

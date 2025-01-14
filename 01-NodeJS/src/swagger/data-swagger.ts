@@ -25,11 +25,9 @@ Usuários
  *                 description: Senha do usuário.
  *     responses:
  *       200:
- *         description: Usuário logado com sucesso!
+ *         description: Usuário logado com sucesso.
  *       403:
- *         description: Erro ~> Usuário ou senha inválidos!
- *       400:
- *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
+ *         description: Erro ~> Usuário ou senha inválidos.
  *       500:
  *         description: Erro ~> Interno do servidor.
  */
@@ -59,9 +57,7 @@ Usuários
  *       201:
  *         description: Usuário criado com sucesso.
  *       409:
- *         description: Erro ~> Usuário com nome já cadastrado!.
- *       400:
- *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
+ *         description: Erro ~> Usuário com nome já cadastrado.
  *       500:
  *         description: Erro ~> Interno do servidor.
  */
@@ -83,11 +79,11 @@ Usuários
  *           type: string
  *     responses:
  *       200:
- *         description: Usuários de ID:xxx está cadastrado!.
+ *         description: Usuários de ID:xxx está cadastrado.
+ *       400:
+ *         description: Erro ~> O ID informado não é um número.
  *       409:
  *         description: Erro ~> Usuário com ID:xxx não é cadastrado!.
- *       400:
- *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
  *       500:
  *         description: Erro ~> Interno servidor.
  */
@@ -103,8 +99,42 @@ Usuários
  *     responses:
  *       200:
  *         description: Objeto com msg de sucesso e array com usuários cadastrados.
+ *       500:
+ *         description: Erro ~> Interno servidor.
+ */
+
+// endpoint Atualiza usuário pelo ID
+/**
+ * @swagger
+ * /user/:{id}:
+ *   patch:
+ *     summary: Atualiza usuário por ID.
+ *     tags:
+ *      - Usuário
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID do usuário a ser atualizado.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userDataUpdate:
+ *                 type: string
+ *                 description: Dados do usuário a serem atualizados.
+ *     responses:
+ *       200:
+ *         description: Usuários de ID:xxx foi atualizado.
  *       400:
- *         description: Erro ~> Servidor indisponível. Tente novamente mais tarde!
+ *         description: Erro ~> O ID informado não é um número.
+ *       409:
+ *         description: Erro ~> Usuário com ID:xxx não é cadastrado.
  *       500:
  *         description: Erro ~> Interno servidor.
  */

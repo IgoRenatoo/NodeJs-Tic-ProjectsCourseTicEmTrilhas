@@ -26,8 +26,8 @@ export async function createUser(req: Request, res: Response): Promise<any> {
 // Busca usuário por ID
 export async function getUser(req: Request, res: Response): Promise<any> {
   try {
-    const userId = parseInt(req.params.id)
-    const result = await UserService.getUser(userId)
+    const userID = parseInt(req.params.id)
+    const result = await UserService.getUser(userID)
     return res.status(result.code).json(result)
   } catch (error) {
     console.error(`Erro no getUser - Controller: ${error}`)
@@ -42,6 +42,19 @@ export async function getUsers(_req: Request, res: Response): Promise<any> {
     return res.status(result.code).json(result)
   } catch (error) {
     console.error(`Erro no getUsers - Controller: ${error}`)
+    return res.status(500).json({ message: 'Erro interno no servidor' })
+  }
+}
+
+// Atualiza usuário por ID
+export async function updateUser(req: Request, res: Response): Promise<any> {
+  try {
+    const userID = parseInt(req.params.id)
+    const userData = req.body
+    const result = await UserService.updateUser(userID, userData)
+    return res.status(result.code).json(result)
+  } catch (error) {
+    console.error(`Erro no updateUser - Controller: ${error}`)
     return res.status(500).json({ message: 'Erro interno no servidor' })
   }
 }

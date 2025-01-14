@@ -138,3 +138,29 @@ Usuários
  *       500:
  *         description: Erro ~> Interno servidor.
  */
+
+// endpoint Deleta usuário pelo ID
+/**
+ * @swagger
+ * /user/:{id}:
+ *   delete:
+ *     summary: Deleta usuário por ID.
+ *     tags:
+ *      - Usuário
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID do usuário a ser localizado.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Usuários de ID:xxx foi deletado.
+ *       400:
+ *         description: Erro ~> O ID informado não é um número.
+ *       409:
+ *         description: Erro ~> Usuário com ID:xxx não é cadastrado!.
+ *       500:
+ *         description: Erro ~> Interno servidor.
+ */

@@ -83,3 +83,20 @@ export async function updateUser(userID: number, userData: UserData): Promise<Re
     return { code: 500, message: 'Erro: Servidor indisponível. Tente novamente mais tarde!' }
   }
 }
+
+// Atualiza usuário por ID
+export async function deleteUser(userID: number): Promise<Result> {
+  try {
+    if (isNaN(userID)) {
+      return { code: 400, message: `Erro: O ID informado não é um número: ${userID}` }
+    }
+    if (!await User.findOne({ where: { id: userID } })) {
+      return { code: 409, message: `Erro: Usuário com ID: ${userID} não é cadastrado!` }
+    }
+    await User.destroy({ where: { id: userID } })
+    return { code: 200, message: `Usuários de ID:${userID} foi deletado!`, content: null }
+  } catch (error) {
+    console.error(`\nErro ao realizar atualização: ${error}`)
+    return { code: 500, message: 'Erro: Servidor indisponível. Tente novamente mais tarde!' }
+  }
+}

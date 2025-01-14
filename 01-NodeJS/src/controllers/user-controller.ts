@@ -58,3 +58,15 @@ export async function updateUser(req: Request, res: Response): Promise<any> {
     return res.status(500).json({ message: 'Erro interno no servidor' })
   }
 }
+
+// Deleta usuário por ID
+export async function deleteUser(req: Request, res: Response): Promise<any> {
+  try {
+    const userID = parseInt(req.params.id)
+    const result = await UserService.deleteUser(userID)
+    return res.status(result.code).json(result)
+  } catch (error) {
+    console.error(`Erro no updateUser - Controller: ${error}`)
+    return res.status(500).json({ message: 'Erro interno no servidor' })
+  }
+}

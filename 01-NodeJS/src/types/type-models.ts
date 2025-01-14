@@ -1,8 +1,16 @@
 export type UserData = {
   id?: number
-  name?: string
+  full_name?: string
   nickname?: string
   password?: string
+  token?: string
+}
+
+export type NewUserData = {
+  id?: number
+  full_name: string
+  nickname: string
+  password: string
   token?: string
 }
 

@@ -1,5 +1,21 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import * as UserService from '../services/user-service'
+import { passport } from '../models/passport-model'
+
+// Middleware Autenticação
+export async function authenticateJWT (req: Request, res: Response, next: NextFunction) {
+  passport.authenticate('jwt', (err: any, user: any) => {
+    if (err) {
+      return res.status(500).json({ message: 'Erro interno do servidor.', error: err.message })
+    }
+    console.log(user)
+    if (!user) {
+      return res.status(401).json({ message: 'Acesso não autorizado. Token inválido ou expirado.' })
+    }
+    req.user = user // Usuário autenticado
+    next()
+  })(req, res, next)
+}
 
 // Realiza login
 export async function logIn(req: Request, res: Response): Promise<any> {

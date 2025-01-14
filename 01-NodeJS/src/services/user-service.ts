@@ -1,4 +1,4 @@
-import { UserData, Result } from '../types/type-models'
+import { UserData, NewUserData, Result } from '../types/type-models'
 import { User } from '../models/database-model'
 import { generatorToken } from '../models/JWT-model'
 
@@ -7,7 +7,8 @@ export async function logInUser(userData: UserData): Promise<Result> {
   try {
     const user: any = await User.findOne({ where: { nickname: userData.nickname, password: userData.password } })
     if (user) {
-      const token = generatorToken(userData)
+      const token = generatorToken(user)
+      await User.update({ token: token.hash }, { where: { id: user.id } })
       return {
         code: 200, message: 'Usuário logado com sucesso!',
         content: { user: user.nickname, expired: `Expira em ${token.expired}`,token: token.hash } }
@@ -21,7 +22,7 @@ export async function logInUser(userData: UserData): Promise<Result> {
 }
 
 // Cria novo usuário
-export async function createUser(userData: UserData): Promise<Result> {
+export async function createUser(userData: NewUserData): Promise<Result> {
   try {
     const hasUser = await User.findOne({ where: { nickname: userData.nickname } })
     if (!hasUser) {
@@ -34,7 +35,7 @@ export async function createUser(userData: UserData): Promise<Result> {
     }
   } catch (error) {
     console.error(`\nErro ao criar usuário: ${error}`)
-    return { code: 500, message: 'Erro: Servidor indisponível. Tente novamente mais tarde!' }
+    return { code: 500, message: 'Erro: Dados divergentes. Tente novamente!' }
   }
 }
 

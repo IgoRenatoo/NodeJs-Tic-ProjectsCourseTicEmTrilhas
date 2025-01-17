@@ -13,6 +13,20 @@ export type NewUserData = {
   password: string
   token?: string
 }
+export type ProductData = {
+  id?: number
+  name?: string
+  category?: string
+  price?: string
+  stock_quantity?: string
+}
+
+export type NewProductData = {
+  name: string
+  category: string
+  price: string
+  stock_quantity?: string
+}
 
 export type Result = {
   code: number

@@ -32,6 +32,14 @@ export const User = sequelize.define('user', {
   token: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
   }
 })
 
@@ -46,8 +54,25 @@ export const Product = sequelize.define('product', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   price: {
     type: DataTypes.DOUBLE,
     allowNull: false
+  },
+  stock_quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
   }
 })

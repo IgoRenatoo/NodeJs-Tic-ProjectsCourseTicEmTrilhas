@@ -47,7 +47,10 @@ Usuários
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               full_name:
+ *                 type: string
+ *                 description: Nome do usuário.
+ *               nickname:
  *                 type: string
  *                 description: Nome do usuário.
  *               password:
